@@ -29,6 +29,7 @@ gem "jbuilder", "~> 2.7"
 gem "bootsnap", ">= 1.4.2", require: false
 
 gem "interactor-rails", "~> 2.0"
+gem "stimulus_reflex"
 
 group :development, :test do
   gem "factory_bot_rails"
