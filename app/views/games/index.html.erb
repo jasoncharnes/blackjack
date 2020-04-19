@@ -1,0 +1,14 @@
+<h1>Blackjack</h1>
+<%= link_to "Start new game", "#", data: { reflex: "click->GameReflex#start" } %>
+<hr>
+<% if @game.active? %>
+  Dealer:
+  <% @game.dealer_hand.cards.each do |card| %>
+    <li><%= card.rank %> <%= card.suit %></li>
+  <% end %>
+  <br>
+  Player:
+  <% @game.player_hand.cards.each do |card| %>
+    <li><%= card.rank %> <%= card.suit %></li>
+  <% end %>
+<% end %>

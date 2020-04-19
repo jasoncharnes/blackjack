@@ -10,52 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_192926) do
+ActiveRecord::Schema.define(version: 2020_04_19_201350) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "cards", force: :cascade do |t|
-    t.bigint "shoe_id", null: false
-    t.bigint "player_id"
+    t.bigint "game_id", null: false
+    t.bigint "hand_id"
     t.integer "rank", null: false
     t.string "suit", null: false
+    t.integer "position"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["player_id"], name: "index_cards_on_player_id"
-    t.index ["shoe_id"], name: "index_cards_on_shoe_id"
+    t.index ["game_id"], name: "index_cards_on_game_id"
+    t.index ["hand_id"], name: "index_cards_on_hand_id"
   end
 
   create_table "games", force: :cascade do |t|
-    t.uuid "table_id", null: false
+    t.string "session_id", null: false
+    t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["table_id"], name: "index_games_on_table_id"
+    t.index ["session_id"], name: "index_games_on_session_id"
   end
 
-  create_table "players", force: :cascade do |t|
-    t.uuid "table_id", null: false
+  create_table "hands", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.boolean "dealer", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["table_id"], name: "index_players_on_table_id"
+    t.index ["game_id"], name: "index_hands_on_game_id"
   end
 
-  create_table "shoes", force: :cascade do |t|
-    t.uuid "table_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["table_id"], name: "index_shoes_on_table_id"
-  end
-
-  create_table "tables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  add_foreign_key "cards", "players"
-  add_foreign_key "cards", "shoes"
-  add_foreign_key "games", "tables"
-  add_foreign_key "players", "tables"
-  add_foreign_key "shoes", "tables"
+  add_foreign_key "cards", "games"
+  add_foreign_key "cards", "hands"
+  add_foreign_key "hands", "games"
 end
