@@ -3,7 +3,6 @@ class DealGame
 
   def call
     2.times.each { hands.each { |hand| hand.draw!(card: next_card) } }
-    context.game.update!(active: true)
   end
 
   private

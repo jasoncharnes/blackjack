@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_201350) do
 
   create_table "games", force: :cascade do |t|
     t.string "session_id", null: false
-    t.boolean "active", default: false, null: false
+    t.string "workflow_state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["session_id"], name: "index_games_on_session_id"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_201350) do
   create_table "hands", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.boolean "dealer", default: false, null: false
+    t.string "workflow_state"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_hands_on_game_id"

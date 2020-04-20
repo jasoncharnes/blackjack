@@ -1,4 +1,16 @@
 class Game < ApplicationRecord
+  include WorkflowActiverecord
+
+  workflow do
+    state :playing do
+      event :end, transitions_to: :ended
+    end
+
+    state :ended do
+      event :play, transitions_to: :playing
+    end
+  end
+
   has_many :cards, dependent: :destroy
   has_many :hands, dependent: :destroy
   has_one :dealer_hand, -> { dealer }, class_name: "Hand"

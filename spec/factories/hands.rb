@@ -9,5 +9,9 @@ FactoryBot.define do
     trait :player do
       dealer { false }
     end
+
+    trait :playing do
+      workflow_state { :playing }
+    end
   end
 end

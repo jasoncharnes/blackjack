@@ -5,12 +5,13 @@ RSpec.describe ResetGame, type: :interactor do
 
   subject { described_class.call(game: game) }
 
-  before do
-    game.cards.first.update(hand: game.hands.first)
-    game.cards.second.update(hand: game.hands.first)
+  it "resets all the cards" do
+    game.cards.update_all(hand_id: game.hands.first.id)
+    expect { subject }.to change { game.cards.played.count }.from(game.cards.count).to(0)
   end
 
-  it "reset all the cards" do
-    expect { subject }.to change { game.cards.played.count }.from(2).to(0)
+  it "resets all the hand states" do
+    game.hands.update(workflow_state: :playing)
+    expect { subject }.to change { Hand.with_playing_state.count }.from(game.hands.count).to(0)
   end
 end

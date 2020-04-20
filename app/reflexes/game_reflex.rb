@@ -24,6 +24,20 @@ class GameReflex < ApplicationReflex
     ::ResetGame.call(game: game)
     ::ShuffleCards.call(cards: game.cards)
     ::DealGame.call(game: game)
+    ::StartGame.call(game: game)
+  end
+
+  def hit
+    ::Hand::Hit.call(hand: game.player_hand)
+
+    if game.player_hand.busted?
+      ::Hand::PlayDealer.call(hand: game.dealer_hand)
+    end
+  end
+
+  def stand
+    game.player_hand.stand!
+    ::Hand::PlayDealer.call(hand: game.dealer_hand)
   end
 
   private

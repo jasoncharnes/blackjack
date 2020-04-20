@@ -32,6 +32,7 @@ gem "activerecord-import"
 gem "interactor-rails", "~> 2.0"
 gem "stimulus_reflex"
 gem "view_component"
+gem "workflow-activerecord", ">= 4.1", "< 6.0"
 
 group :development, :test do
   gem "factory_bot_rails"
