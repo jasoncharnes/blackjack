@@ -7,5 +7,9 @@ FactoryBot.define do
     trait :with_hand do
       hand
     end
+
+    trait :ace do
+      rank { 1 }
+    end
   end
 end

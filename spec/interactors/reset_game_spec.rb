@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ResetGame, type: :interactor do
   let(:game) { create(:game) }
 
-  subject { described_class.call(cards: game.cards) }
+  subject { described_class.call(game: game) }
 
   before do
     game.cards.first.update(hand: game.hands.first)

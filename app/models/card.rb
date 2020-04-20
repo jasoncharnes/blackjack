@@ -6,6 +6,7 @@ class Card < ApplicationRecord
       end
     }.flatten
   }
+  FACES = {jack: 11, queen: 12, king: 13}
   RANKS = 1..13
   SUITS = ["club", "diamond", "heart", "spade"]
 
@@ -19,5 +20,19 @@ class Card < ApplicationRecord
 
   def self.next
     order_by_position.unplayed.first
+  end
+
+  def ace?
+    rank == 1
+  end
+
+  def face?
+    rank.in?(FACES.values)
+  end
+
+  def value
+    return 11 if ace?
+    return 10 if face?
+    rank
   end
 end

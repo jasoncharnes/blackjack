@@ -2,13 +2,9 @@
 <%= link_to "Start new game", "#", data: { reflex: "click->GameReflex#start" } %>
 <hr>
 <% if @game.active? %>
-  Dealer:
-  <% @game.dealer_hand.cards.each do |card| %>
-    <li><%= card.rank %> <%= card.suit %></li>
-  <% end %>
+  Dealer: <%= @game.dealer_hand.value %>
+  <%= render(CardComponent.with_collection(@game.dealer_hand.cards)) %>
   <br>
-  Player:
-  <% @game.player_hand.cards.each do |card| %>
-    <li><%= card.rank %> <%= card.suit %></li>
-  <% end %>
+  Player: <%= @game.player_hand.value %>
+  <%= render(CardComponent.with_collection(@game.player_hand.cards)) %>
 <% end %>

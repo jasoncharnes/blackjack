@@ -31,6 +31,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "activerecord-import"
 gem "interactor-rails", "~> 2.0"
 gem "stimulus_reflex"
+gem "view_component"
 
 group :development, :test do
   gem "factory_bot_rails"
