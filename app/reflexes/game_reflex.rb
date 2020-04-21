@@ -43,6 +43,10 @@ class GameReflex < ApplicationReflex
   private
 
   def game
-    @game ||= Game.includes(:cards, hands: :cards).find_by(session_id: session.id.to_s)
+    @game ||= begin
+      Game
+        .includes(:cards, hands: :cards)
+        .find_or_create_by(session_id: session.id.to_s)
+    end
   end
 end

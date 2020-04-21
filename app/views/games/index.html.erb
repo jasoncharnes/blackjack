@@ -1,15 +1,17 @@
 <h1>Blackjack</h1>
 <%= link_to "Start new game", "#", data: { reflex: "click->GameReflex#start" } %>
-<hr>
-Dealer: <%= @game.dealer_hand.value %>
-<%= render(CardComponent.with_collection(@game.dealer_hand.cards)) %>
-<br>
-Player: <%= @game.player_hand.value %>
-<% if @game.ended? %>
-  <%= @game.player_hand.result %>
-<% end %>
-<%= render(CardComponent.with_collection(@game.player_hand.cards)) %>
-<% if @game.player_hand.playing? %>
-  <%= link_to "Hit", "#", data: { reflex: "click->GameReflex#hit" } %>
-  <%= link_to "Stand", "#", data: { reflex: "click->GameReflex#stand" } %>
+<% if @game %>
+  <hr>
+  Dealer: <%= @game.dealer_hand.value %>
+  <%= render(CardComponent.with_collection(@game.dealer_hand.cards)) %>
+  <br>
+  Player: <%= @game.player_hand.value %>
+  <% if @game.ended? %>
+    <%= @game.result(@game.player_hand) %>
+  <% end %>
+  <%= render(CardComponent.with_collection(@game.player_hand.cards)) %>
+  <% if @game.player_hand.playing? %>
+    <%= link_to "Hit", "#", data: { reflex: "click->GameReflex#hit" } %>
+    <%= link_to "Stand", "#", data: { reflex: "click->GameReflex#stand" } %>
+  <% end %>
 <% end %>

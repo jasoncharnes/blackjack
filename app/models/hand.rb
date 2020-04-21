@@ -27,14 +27,6 @@ class Hand < ApplicationRecord
     cards << card
   end
 
-  def result
-    return :bust if busted?
-    return :win if game.dealer_hand.busted?
-    return :win if value > game.dealer_hand.value
-    return :push if value == game.dealer_hand.value
-    :loss
-  end
-
   def value
     cards
       .select(&:ace?)

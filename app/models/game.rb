@@ -19,6 +19,14 @@ class Game < ApplicationRecord
   after_create :generate_deck
   after_create :generate_hands
 
+  def result(hand)
+    return :bust if hand.busted?
+    return :win if dealer_hand.busted?
+    return :win if hand.value > dealer_hand.value
+    return :push if hand.value == dealer_hand.value
+    :loss
+  end
+
   private
 
   def generate_deck
