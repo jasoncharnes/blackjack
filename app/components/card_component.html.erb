@@ -1,7 +1,29 @@
-<div>
+<div class="w-32 h-48 p-2 mx-2 border rounded-md shadow">
   <% if visible? %>
-    <%= rank %> <%= suit %>
+    <div class="h-full flex flex-col content-between justify-between <%= card_color %>">
+      <div class="flex items-start">
+        <div class="flex flex-col items-center">
+          <div class="mb-1 text-xl">
+            <%= rank %>
+          </div>
+          <%= suit(size: "fa-lg") %>
+        </div>
+      </div>
+      <div class="text-center">
+        <%= suit(size: "fa-3x") %>
+      </div>
+      <div class="flex items-end transform rotate-180">
+        <div class="flex flex-col items-center">
+          <div class="mb-1 text-xl">
+            <%= rank %>
+          </div>
+          <%= suit(size: "fa-lg") %>
+        </div>
+      </div>
+    </div>
   <% else %>
-    Hidden
+    <div class="flex items-center justify-center h-full bg-gray-200 rounded">
+      <i class="text-gray-400 fas fa-crown fa-3x"></i>
+    </div>
   <% end %>
 </div>

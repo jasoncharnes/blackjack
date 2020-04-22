@@ -41,7 +41,7 @@ RSpec.describe CardComponent, type: :component do
 
     it "should return a font-awesome icon for the given suit" do
       allow(card).to receive(:suit) { :club }
-      expect(subject).to eq("<i class=\"fas fa-club fa-fw\"></i>")
+      expect(subject).to eq("<i class=\"fas fa-club fa-fw \"></i>")
     end
   end
 

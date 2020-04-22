@@ -5,14 +5,18 @@ class CardComponent < ViewComponent::Base
     @card = card
   end
 
+  def card_color
+    @card.suit.in?(["diamond", "heart"]) ? "text-red-600" : "text-black"
+  end
+
   def rank
     return "A" if @card.ace?
     return face if @card.face?
     @card.rank
   end
 
-  def suit
-    content_tag :i, nil, class: "fas fa-#{@card.suit} fa-fw"
+  def suit(size: "")
+    content_tag :i, nil, class: "fas fa-#{@card.suit} fa-fw #{size}"
   end
 
   private
