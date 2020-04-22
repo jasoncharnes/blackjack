@@ -6,6 +6,7 @@ class CreateCards < ActiveRecord::Migration[6.0]
       t.integer :rank, null: false
       t.string :suit, null: false
       t.integer :position
+      t.boolean :visible, default: true, null: false
 
       t.timestamps
     end

@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe ResetGame, type: :interactor do
   let(:game) { create(:game) }
 
+  before { create_list(:card, 2, game: game) }
+
   subject { described_class.call(game: game) }
 
   it "resets all the cards" do

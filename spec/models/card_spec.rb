@@ -51,6 +51,13 @@ RSpec.describe Card, type: :model do
     end
   end
 
+  describe "#hide!" do
+    it "should change visible to false" do
+      card = create(:card)
+      expect { card.hide! }.to change { card.visible? }.from(true).to(false)
+    end
+  end
+
   describe "#value?" do
     it "should return the rank" do
       subject.rank = 5

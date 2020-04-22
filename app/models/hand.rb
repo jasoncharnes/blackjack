@@ -18,7 +18,7 @@ class Hand < ApplicationRecord
   end
 
   belongs_to :game
-  has_many :cards
+  has_many :cards, -> { order_by_position }
 
   scope :dealer, -> { where(dealer: true) }
   scope :player, -> { where(dealer: false) }
@@ -27,9 +27,19 @@ class Hand < ApplicationRecord
     cards << card
   end
 
+  def raw_value
+    cards.sum(&:value)
+  end
+
   def value
     cards
       .select(&:ace?)
-      .reduce(cards.sum(&:value)) { |sum, _card| sum > 21 ? sum - 10 : sum }
+      .reduce(visible_value) { |sum, _card| sum > 21 ? sum - 10 : sum }
+  end
+
+  private
+
+  def visible_value
+    cards.visible.sum(&:value)
   end
 end

@@ -5,6 +5,8 @@ class Hand::PlayDealer
   after { context.hand.game.end! }
 
   def call
+    context.hand.cards.update_all(visible: true)
+
     while context.hand.playing?
       if context.hand.value >= 17
         context.hand.stand!

@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_201350) do
     t.integer "rank", null: false
     t.string "suit", null: false
     t.integer "position"
+    t.boolean "visible", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["game_id"], name: "index_cards_on_game_id"

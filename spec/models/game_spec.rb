@@ -26,7 +26,7 @@ RSpec.describe Game, type: :model do
   describe "callbacks" do
     describe "after create" do
       it "should generate a deck of cards" do
-        expect { create(:game) }.to change { Card.count }.by(52)
+        expect { create(:game, :with_callbacks) }.to change { Card.count }.by(52)
       end
 
       it "should generate two hands" do

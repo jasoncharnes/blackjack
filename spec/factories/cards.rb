@@ -11,5 +11,9 @@ FactoryBot.define do
     trait :ace do
       rank { 1 }
     end
+
+    trait :hidden do
+      visible { false }
+    end
   end
 end

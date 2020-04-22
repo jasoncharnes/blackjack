@@ -20,6 +20,7 @@ class Game < ApplicationRecord
   after_create :generate_hands
 
   def result(hand)
+    return :blackjack if hand.blackjack? && !dealer_hand.blackjack?
     return :bust if hand.busted?
     return :win if dealer_hand.busted?
     return :win if hand.value > dealer_hand.value

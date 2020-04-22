@@ -3,6 +3,8 @@ require "rails_helper"
 RSpec.describe ShuffleCards, type: :interactor do
   let(:game) { create(:game) }
 
+  before { create_list(:card, 2, game: game) }
+
   subject { described_class.call(cards: game.cards) }
 
   it "shuffles the cards" do

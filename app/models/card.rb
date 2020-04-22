@@ -13,10 +13,12 @@ class Card < ApplicationRecord
   belongs_to :game
   belongs_to :hand, optional: true
 
+  scope :for_hand, ->(hand) { where(hand: hand) }
   scope :order_by_position, -> { order(position: :asc) }
   scope :played, -> { where.not(hand_id: nil) }
   scope :shuffled, -> { order("RANDOM()") }
   scope :unplayed, -> { where(hand_id: nil) }
+  scope :visible, -> { where(visible: true) }
 
   def self.next
     order_by_position.unplayed.first
@@ -28,6 +30,10 @@ class Card < ApplicationRecord
 
   def face?
     rank.in?(FACES.values)
+  end
+
+  def hide!
+    update(visible: false)
   end
 
   def value

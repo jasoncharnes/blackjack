@@ -1,4 +1,6 @@
 class CardComponent < ViewComponent::Base
+  delegate :visible?, to: :@card
+
   def initialize(card:)
     @card = card
   end

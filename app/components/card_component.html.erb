@@ -1,3 +1,7 @@
 <div>
-  <%= rank %> <%= suit %>
+  <% if visible? %>
+    <%= rank %> <%= suit %>
+  <% else %>
+    Hidden
+  <% end %>
 </div>
